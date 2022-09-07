@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="file-input" multiple accept="image/*" />
+    <div id="div"></div>
+
+    <script type="text/javascript">
+        var fileDom = document.getElementById('file-input');
+
+        fileDom.onchange = function (e) {
+            let files = e.target.files; // 这个files可以用new File()构建出来
+            console.log(files[0]);
+            let img = new Image();
+            img.onload = function () {
+                document.querySelector('#div').appendChild(img);
+                console.log(img.width);
+                console.log(img.height);
+            };
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                let result = e.target.result;
+                console.log(result);
+                // img.src = result;
+            }
+            reader.readAsDataURL(files[0]);
+            // reader.readAsText(files[0]);
+            // reader.readAsArrayBuffer(files[0]);
+            // reader.readAsBinaryString(files[0]);
+
+        }
+
+    </script>
+</body>
+</html>

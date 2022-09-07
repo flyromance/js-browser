@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src='sync_module.js'></script>
+  <script>
+  F.define('string', function() {
+    return {
+      trim: function(str) {
+        return str.replace(/^\s+|\s+$/g, '')
+      }
+    }
+  });
+
+  F.use(['string.trim', { name: ' dd ' }], function(trim, obj) {
+    console.log(trim(obj.name));
+  });
+
+  F.use('string.trim', function(trim) {
+    console.log(trim(' sss '))
+  });
+
+  F.use(function(trim) {
+    console.log(123)
+  });
+
+  F.define('xx.dd', {
+    say: function () {}
+  })
+  
+  </script>
+</body>
+
+</html>

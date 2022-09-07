@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="div" class="div" title="div" style="color:red;" onclick="show()">div</div>
+    <!--<div id="comment"></div>-->
+    <ul id="list">
+        <li title="123">a1</li>
+        <li>a2</li>
+        <li>a3</li>
+    </ul>
+    <script type="text/javascript">
+        function show() {
+            console.log('show click');
+        }
+        function $(str) {
+            return document.getElementById(str);
+        }
+        /*
+        * node
+        * */
+        var div = document.getElementById('div');
+        var text = div.childNodes[0]; // div.firstChild   div.lastChild
+        var attr = div.getAttributeNode('id');
+
+        console.log(div.nodeName); // DIV
+        console.log(div.nodeValue); // null
+        console.log(attr.nodeName); // id
+        console.log(text.nodeName); // #text
+
+        console.log(document.nodeType); // 9
+        console.log(document.nodeName);
+
+        var comment = document.getElementById('comment');  // 找不到注释的节点
+        //    console.log(comment.nodeType);
+
+        var list = document.getElementById('list');
+        console.log(list.childNodes.length);  //7 或者 3(ie <9)
+        console.log(list.childNodes.item(1)); //li  a1
+        console.log(list.lastChild);
+        console.log(list.firstChild);
+        var item1 = list.childNodes[1];
+        console.log(item1.parentNode);
+        console.log(item1.nextSibling);
+        console.log(item1.previousSibling); // 文本节点
+        //    console.log(item1.siblings); // 没有siblings
+
+        var newItem = item1.cloneNode(false); // true：深层次的clone
+        console.log(newItem); // 只复制了空壳， <li title='123'></li>
+        list.appendChild(newItem);
+
+        var newItem1 = item1.cloneNode(true); // 事件不会复制
+        console.log(newItem1); // 全部复制了
+        list.replaceChild(newItem1, newItem);
+
+        list.removeChild(newItem1);
+
+        /*
+          Document
+        */
+        console.log(document.URL);
+        console.log(document.location.href); // 相等
+        console.log(document.title);
+        console.log(document.domain); // 根域相同才能通过跨域； 只能从b.test.com 到 test.com, 不能在回到b.test.com
+
+        console.log(document.anchors);// a name=''
+        console.log(document.links); // a href=''
+        console.log(document.forms);
+        console.log(document.images);
+
+        // document.getElementById() 等。。。
+
+        var divCreate = document.createElement('div');
+        var textCreate = document.createTextNode('create text node');
+        var attrCreate = document.createAttribute('id'); // 创建属性节点
+        attrCreate.value = 'createDiv'; // 添加节点的值，不能用 nodeValue
+        divCreate.appendChild(textCreate);
+        divCreate.setAttributeNode(attrCreate);  // 不能用appendChild添加
+        document.body.appendChild(divCreate);
+
+        /*
+        * Element
+        * */
+        // htmlelement 自带属性，也就是公认特性，可以用.来访问
+        console.log(div.tagName); // DIV ： 注意比较的时候要转为小写
+        console.log(div.title);
+        console.log(div.id);
+        console.log(div.className);
+        div.dir = 'rtl';
+
+        // 自定义特性只能用getAttribute方法访问，除了ie之外
+        // 自定义属性，最好前面加上data-
+
+        // 有两类特殊的属性：style 和 onclick
+        console.log(div.style);  // 返回对象,0:xxx, 1:xxx, xxx:xxx
+        console.log(div.onclick); // 返回事件函数
+        console.log(div.getAttribute('style')); // color:red;
+        console.log(div.getAttribute('onclick'));  // show()
+    // 第一个：style
+
+
+
+    </script>
+</body>
+
+</html>

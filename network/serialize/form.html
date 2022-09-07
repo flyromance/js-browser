@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+//            console.log($.param({name:'fanlong','age':28}));
+            console.log( $.param( [{name:'a',value:'1'},{name:'b',value:'2'}]) );
+
+            console.log($('#form1').serializeArray())
+            // console.log($.param($('#form1').serializeArray()));
+            // serialize() =  param(  serializeArray()  );
+            console.log($('#form1').serialize());
+
+//            console.log($("input:eq(1)").serializeArray());
+//            console.log($("input:eq(1)").serialize());
+
+            // checked = 'checked' or  checked= true; 都可以的
+            // $('').attr('checked',true) or .attr('checked','checked');
+            // .attr('checked', false) or .attr('checked', '');
+            // checked = '' or checked = false;
+            $("input:eq(2)").get(0).checked = '';
+
+            // 获取所有选中的复选框，并转为serializeArray格式
+            var arr = [];
+            $('input[type=checkbox]:checked').each(function(index, item){
+                var _obj = {};
+                _obj.name = item.name;
+                _obj.value = item.value;
+                arr[arr.length] = _obj;
+            });
+            console.log(arr)
+
+            // select
+            // 获取select中 选中的option 的索引值
+            console.log( $('#select').get(0).selectedIndex );
+            console.log( $('#select').attr("selectedIndex") ); // 无效，为什么？
+            $('#select').get(0).selectedIndex = 1;
+
+            // 获取选中的值
+            console.log( $("#select").val());
+
+
+            // 设置value，注意：都是对选中的那个option设置的
+//            $('#select').attr('value','shanghairen');
+//            $('#select').get(0).value = 'gongyiyang';
+//            console.log( $('#select').get(0).value );
+            console.log($('#select').get(0).type);
+
+            console.log($('input')[0].value);
+            console.log($('textarea').get(0).type);
+        });
+
+
+    </script>
+</head>
+<body>
+    <form id="form1">
+        <input name="a" value="1" type="text"/>
+        <input name="b" value="2" type="text"/>
+        <br/>
+
+        <input type="radio" name="male" value="nan" checked/><label>nan</label>
+        <input type="radio" name="male" value="nv" /><label>nv</label>
+        <br/>
+        <input type="checkbox" name="favor" value="basketball" checked/><label>basketball</label>
+        <input type='checkbox' name="favor" value="football" checked><label>football</label>
+        <input type="checkbox" name="favor" value="badmition"/><label>badmition</label>
+        <br/>
+        <select name="city" id="select">
+            <option value="beijing">beijing</option>
+            <option value="nanjing">nanjing</option>
+            <option value="shanghai" selected>shanghai</option>
+        </select>
+        <br/>
+        <input type="submit" value="tijiao"/>
+        <button type="button">xxx</button>
+        <textarea name="area">this is area!<a>hhh</a></textarea>
+    </form>
+</body>
+</html>

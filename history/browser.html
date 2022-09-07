@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>history</h1>
+
+    <a href="http://javascript.ruanyifeng.com/bom/history.html#toc2">ruanyifeng</a>
+
+    <div>
+      <a href="/b" id="a">b</a>
+    </div>
+    <script type="text/javascript">
+      // document.querySelector('#a').onclick = function (e) {
+      // 	console.log(e);
+      // 	e.preventDefault();
+      // }
+
+      // window['onpopstate']
+      window.addEventListener("popstate", function(e) {
+        let { state } = e;
+        console.log(e);
+      });
+
+      // 浏览器地址栏显示: www.xxx.com
+
+      // pushState(state, title, url);  state与url是一一对应的
+      // 浏览器地址栏显示: www.xxx.com/a
+      // history.pushState({url: 'a'}, 'a', '/a');
+
+      // history.pushState({url: 'b'}, 'b', '/b');
+      // 浏览器地址栏显示: www.xxx.com/b
+
+      // 此时：历史长度为3
+
+      // replaceState(state, title, url)
+      // 与pushState一模一样，只是修改当前的历史记录，替换 /a 和 它对应的state数据{url: 'a'}
+      // history.replaceState({type: 're'}, 'c', '/c');
+      // 浏览器地址栏显示: www.xxx.com/c
+
+      // 此时：histroy.length还是为3
+
+      // history.back() || history.go(-1) || 手动按浏览器上的回退键
+      // 浏览器地址栏显示: www.xxx.com/a
+
+      // history.forword() || history.go(1) || 手动按浏览器上的前进键
+      // 浏览器地址栏显示: www.xxx.com/c
+    </script>
+  </body>
+</html>

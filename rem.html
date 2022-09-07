@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <title>Document</title>
+    <script>
+        const html = document.documentElement;
+        const width = html.clientWidth; // 375 拿到的是理想布局视口的宽度
+        html.style.fontSize = width / 37.5; // 1rem 10px;
+        // 10px;  1rem;  比例 375 / 37.5 / 37.5
+        // 在plus 1rem => 414 / 37.5 , 比例 414 / 37.5 / 414
+
+
+       /*
+        缩放 * devicePixelRatio = 设备像素 / 理想布局视口的宽度
+
+        如果缩放1，那就要求ui按照 320  /  375  /  414 的尺寸设计
+       */
+    </script>
+  </head>
+  <body></body>
+</html>

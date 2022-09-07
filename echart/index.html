@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>echarts</title>    
+    <script src="/echart/echart.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 500px; height: 400px;"></div>
+        
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 柱状图：指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        var data2 = {
+            "name": "flare",
+            "children": [
+                {
+                    "name": "flex",
+                    "symbol": "image://http://www.iconpng.com/png/ecommerce-business/iphone.png",
+                    "children": [
+                        {"name": "FlareVis", "value": 4116}
+                    ]
+                },
+                {
+                    "name": "scale",
+                    "children": [
+                        {"name": "IScaleMap", "value": 2105},
+                        {"name": "LinearScale", "value": 1316},
+                        {"name": "LogScale", "value": 3151},
+                        {"name": "OrdinalScale", "value": 3770},
+                        {"name": "QuantileScale", "value": 2435},
+                        {"name": "QuantitativeScale", "value": 4839},
+                   ]
+                },
+                {
+                    "name": "display",
+                    "children": [
+                        {"name": "DirtySprite", "value": 8833}
+                   ]
+                }
+            ]
+        };
+
+        // myChart.showLoading();
+
+        var option_tree = {
+            title: {
+                text: '123'
+            },
+            // tooltip: {
+            //     trigger: 'item',
+            //     triggerOn: 'mousemove'
+            // },
+            // legend: {
+            //     top: '2%',
+            //     left: '3%',
+            //     orient: 'vertical',
+            //     data: [{
+            //         name: 'tree1',
+            //         icon: 'rectangle'
+            //     } ,
+            //     {
+            //         name: 'tree2',
+            //         icon: 'rectangle'
+            //     }],
+            //     borderColor: '#c23531'
+            // },
+            series:[
+                {
+                    type: 'tree',
+                    name: 'tree2',
+                    data: [ data2 ],
+
+                    // orient: 'vertical', // 水平horizontal 还是 垂直
+
+                    top: '2%',
+                    left: '2%',
+
+                    // symbolSize: 12,
+                    "symbolSize": [20, 20],
+
+                    label: {
+                        normal: {
+                            position: 'top',
+                            verticalAlign: 'middle',
+                            align: 'right',
+                            show: false,
+                        }
+                    },
+
+                    lineStyle: {
+
+                    },
+
+                    leaves: {
+                        label: {
+                            normal: {
+                                position: 'top',
+                                verticalAlign: 'middle',
+                                align: 'left',
+                            }
+                        }
+                    },
+
+                    expandAndCollapse: true,
+
+                    animationDuration: 550,
+                    animationDurationUpdate: 750,
+                }
+            ]
+        };
+
+        // myChart.hideLoading();
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option_tree);
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      #box1 {
+        width: 500px;
+        height: 600px;
+        position: relative;
+        background-color: black;
+        position: relative;
+      }
+      #box2 {
+        width: 200px;
+        height: 400px;
+        background-color: chartreuse;
+      }
+      #box3 {
+        width: 100px;
+        height: 200px;
+        background-color: aqua;
+      }
+      #box4 {
+        width: 500px;
+        height: 50px;
+        background-color: red;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1">
+      <div id="box2">
+        <div id="box3"></div>
+      </div>
+
+      <div id="box4"></div>
+    </div>
+    <script>
+      function event(e) {
+        console.log(e.currentTarget, e.eventPhase); // 1捕获 2目标 3冒泡
+      }
+      document.querySelector("body").addEventListener("click", event);
+      document.querySelector("#box1").addEventListener("click", event, { capture: true });
+      document.querySelector("#box1").addEventListener("click", event);
+      document.querySelector("#box2").addEventListener("click", event);
+      document.querySelector("#box3").addEventListener("click", event);
+      document.querySelector("#box4").addEventListener("click", event);
+    </script>
+  </body>
+</html>

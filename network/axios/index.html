@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../vue.js"></script>
+	<script src="axios.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div>
+			<button @click="get">get</button>
+			<br>
+			<button @click="post">post</button>
+			<br>
+			<button @click="http">http</button>
+		</div>
+		<div>{{msg}}</div>
+	</div>
+
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				msg: ''
+			},
+			created: function () {
+				axios.interceptors.request.use(function (req) {
+					console.log('request init...', req)
+					return req
+				});
+
+				axios.interceptors.response.use(function (res) {
+					console.log('response init...', res)
+					return res
+				})
+			},
+			methods: {
+				get: function () {
+					var self = this
+					axios.get('/data.json', {
+						params: {
+							age: 123,
+						},
+						headers: {
+							token: 'fanlong'
+						},
+						before: function (req) {
+							console.log(req);
+						},
+					}).then(function (ret) {
+						console.log(ret)
+						self.msg = ret.data
+					})
+				},
+				post: function () {
+					var self = this
+					axios.post('/data.json', {
+						userid: 23123
+					}, {
+						params: {
+							age: 123,
+						},
+						headers: {
+							token: 'fly'
+						}
+					}).then(function (ret) {
+						console.log(ret)
+					})
+				},
+				http: function () {
+					var self = this
+					axios({
+						method: 'post',
+						url: '/data.json',
+						data: {
+
+						},
+						params: {
+							age: 123
+						},
+						headers: {
+							token: '2046'
+						}
+					}).then(function (ret) {
+						console.log(ret)
+					})
+				}
+			}
+		})
+	</script>
+</body>
+</html>

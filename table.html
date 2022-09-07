@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+</table>
+<script>
+    // 拼接字符串，比操作dom好
+    var tableString = "<table><tbody><tr><td>11</td><td>123</td></tr></tbody>";
+    document.body.innerHTML = tableString;
+
+
+    // 操作dom
+    var table = document.createElement('table')
+//    table.cellspacing = 0;
+//    table.cellspadding = 10;
+    table.border = 1;
+    var tbody = document.createElement('tbody');
+    var tr = document.createElement('tr');
+    var td1 = document.createElement('td');
+    var td1Text = document.createTextNode('td1');
+    var td2 = document.createElement('td');
+    var td2Text = document.createTextNode('td2');
+    td1.appendChild(td1Text);
+    td2.appendChild(td2Text);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
+    table.appendChild(tbody);
+    document.body.appendChild(table);
+
+
+    // 自带的方法
+    var table1 = document.createElement('table');
+    var tbody1 = document.createElement('tbody');
+    table1.appendChild(tbody1);
+    tbody1.insertRow(0);
+    tbody1.rows[0].insertCell(0);
+    tbody1.rows[0].cells[0].appendChild(td1Text);  // td1text 只有一个，会把原先的拉过来！！
+
+    document.body.appendChild(tbody1);
+
+</script>
+</body>
+</html>

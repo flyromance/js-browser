@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript" src="async_module.js"></script>
+
+	<script type="text/javascript">
+		// F.config();
+		F.use(['lib/a', 'lib/b', 'lib/inner/c'], function (a, b, c) {
+			console.log(a, b.name, c);
+		})
+	</script>
+</body>
+</html>

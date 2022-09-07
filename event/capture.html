@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <button>click me</button>
+  </div>
+
+  <script>
+    window.addEventListener('click', function (e) {
+      console.log('window', e.target, e.currentTarget)
+      // e.stopImmediatePropagation(); // 所有事件都触发不了
+    }, true)
+
+    window.addEventListener('click', function (e) {
+      console.log('window', e.target, e.currentTarget)
+    })
+
+    document.querySelector('#wrapper').addEventListener('click', function (e) {
+      console.log('wrapper', e.target, e.currentTarget)
+    })
+
+    document.querySelector('button').addEventListener('click', function (e) {
+      // e.stopPropagation();
+      // e.stopImmediatePropagation();
+      console.log('target', e.target, e.currentTarget)
+    }, true)
+
+    document.querySelector('button').addEventListener('click', function (e) {
+      console.log('target', e.target, e.currentTarget)
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .layout {}
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>优缺点</li>
+    <li>高度不固定，是否可以做到自适应</li>
+    <li>兼容性，写业务的时候，哪个最实用</li>
+  </ul>
+
+  <!-- main必须放在最上面 -->
+  <section class="layout float-1">
+    <style>
+    </style>
+    <article class="container">
+      <div class="layout">
+        <div class="col-main-wrapper">
+          <div class="col-main">main</div>
+        </div>
+        <div class="col-left">left</div>
+        <div class="col-right">right</div>
+      </div>
+    </article>
+  </section>
+
+  <section class="layout float-2">
+    <style>
+    </style>
+    <article class="container">
+      <div class="layout">
+        <div class="col-main">main</div>
+        <div class="col-left">left</div>
+        <div class="col-right">right</div>
+      </div>
+    </article>
+  </section>
+</body>
+
+</html>

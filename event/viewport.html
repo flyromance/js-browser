@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta name="viewport" content="user-scalable=no"> -->
+    <meta name="viewport" content="user-scalable=no, width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <ul>
+      <li id="li1">viewport width=device-width</li>
+      <li>viewport user-scalable=no</li>
+    </ul>
+
+    <div id="show"></div>
+
+    <script>
+      var li1 = document.querySelector("#li1");
+
+      // li1.addEventListener("touchstart", function () {
+      //   document.querySelector("#show").innerHTML = "touchstart";
+      // });
+
+      // li1.addEventListener("touchmove", function (e) {
+      //   console.log(e)
+      //   document.querySelector("#show").innerHTML = `touchmove ${e}`;
+      // });
+
+      li1.addEventListener("touchend", function () {
+        document.querySelector("#show").innerHTML = "touchend";
+      });
+
+      li1.addEventListener("mousedown", function () {
+        document.querySelector("#show").innerHTML = "mousedown";
+      });
+
+      li1.addEventListener("click", function () {
+        // document.querySelector('#show').innerHTML = "click";
+      });
+    </script>
+  </body>
+</html>

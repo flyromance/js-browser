@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- bfc内，box边距重叠 -->
+  <section class="box">
+    <style>
+      .parent {
+        background-color: red;
+        overflow: hidden;
+      }
+
+      .child {
+        margin: 10px 0 30px;
+        height: 100px;
+        background-color: green;
+      }
+
+      .child-wrapper {
+        overflow: hidden;
+      }
+    </style>
+    <div class="parent">
+      <div class="child">child</div>
+      <div class="child-wrapper">
+        <div class="child">child</div>
+      </div>
+      <div class="child">child</div>
+    </div>
+  </section>
+
+  <!-- BFC的区域不会与float的元素区域重叠 -->
+  <section id="layout">
+    <style>
+      #left-right {
+        background-color: black;
+      }
+
+      #left {
+        height: 30px;
+        float: left;
+        background-color: pink;
+      }
+
+      #right {
+        height: 50px;
+        overflow: hidden;
+        background-color: green;
+      }
+    </style>
+    <div id="left-right">
+      <div id="left">left</div>
+      <div id="right">right</div>
+    </div>
+  </section>
+
+  <!-- bfc内部的float元素，也会参与高度计算，也就是不会有高度塌陷了 -->
+  <section id="float">
+    <style>
+      #wrapper {
+        background-color: yellow;
+        overflow: hidden;
+        /* float: left; */
+        /* position: absolute; */
+      }
+
+      #left-1 {
+        float: left;
+        height: 50px;
+      }
+    </style>
+    <div id="wrapper">
+      <div id="left-1">dddd</div>
+    </div>
+
+  </section>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    #wrapper {
+      width: 1000px;
+      margin: 0 auto;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-rows: 100px;
+      grid-template-columns: 300px auto 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div class="layout">
+      <div class="col-left">left</div>
+      <div class="col-main">
+        <h1>grid</h1>
+        <p>this is grid layout</p>
+      </div>
+      <div class="col-right">right</div>
+    </div>
+  </div>
+</body>
+</html>

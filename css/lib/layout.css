@@ -1,0 +1,174 @@
+.hide {
+    display: none !important;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+/* 通用的 */
+.mr100 {
+    margin-right: 100px;
+}
+
+.mr200 {
+    margin-right: 200px;
+}
+
+.mr300 {
+    margin-right: 300px;
+}
+
+.mr400 {
+    margin-right: 400px;
+}
+
+.mr500 {
+    margin-right: 500px;
+}
+
+.mr600 {
+    margin-right: 600px;
+}
+
+.mr-100 {
+    margin-right: -100px;
+}
+
+.mr-200 {
+    margin-right: -200px;
+}
+
+.mr-300 {
+    margin-right: -300px;
+}
+
+.mr-400 {
+    margin-right: -400px;
+}
+
+.mr-500 {
+    margin-right: -500px;
+}
+
+.mr-600 {
+    margin-right: -600px;
+}
+
+.ml100 {
+    margin-left: 100px;
+}
+
+.ml200 {
+    margin-left: 200px;
+}
+
+.ml300 {
+    margin-left: 300px;
+}
+
+.ml400 {
+    margin-left: 400px;
+}
+
+.ml500 {
+    margin-left: 500px;
+}
+
+.ml600 {
+    margin-left: 600px;
+}
+
+.ml-100 {
+    margin-left: -100px;
+}
+
+.ml-200 {
+    margin-left: -200px;
+}
+
+.ml-300 {
+    margin-left: -300px;
+}
+
+.ml-400 {
+    margin-left: -400px;
+}
+
+.ml-500 {
+    margin-left: -500px;
+}
+
+.ml-600 {
+    margin-left: -600px;
+}
+
+.w-all {
+    width: 100%;
+}
+.w100 {
+    width: 100px;
+}
+
+.w200 {
+    width: 200px;
+}
+
+.w300 {
+    width: 300px;
+}
+
+.w400 {
+    width: 400px;
+}
+
+.w500 {
+    width: 500px;
+}
+
+.w600 {
+    width: 600px;
+}
+
+
+/* layout 
+ * 注释的部分需要根据设计稿来定
+ */
+.col-wrap:after {
+    display: table;
+    content: ' ';
+    clear: both;
+}
+
+.col-main-wrap {
+    float: left;
+    width: 100%;
+}
+
+/*.col-main {
+    margin-left: 100px;
+    margin-right: 100px;
+}*/
+
+.col-left {
+    float: left;
+    margin-left: -100%;
+}
+
+/*.col-left {
+    width: 100px;
+}
+*/
+
+.col-right {
+    float: left;
+}
+
+/*.col-right {
+    width: 100px;
+    margin-left: -100px;
+}*/

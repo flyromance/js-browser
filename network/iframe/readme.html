@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src=""></script>
+</head>
+
+<body>
+    <a href="https://github.com/hstarorg/HstarDoc/blob/master/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/Iframe%E8%B7%A8%E5%9F%9F%E9%80%9A%E4%BF%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F.md">跨域通信的几种方式</a>
+    <br>
+    <a href="https://github.com/Nealyang/YOU-SHOULD-KNOW-JS/blob/master/doc/basic_js/JavaScript%E4%B8%AD%E7%9A%84%E8%B7%A8%E5%9F%9F%E6%80%BB%E7%BB%93.md">跨域总结</a>
+
+
+    <section>
+        <h2>iframe跨域场景重现</h2>
+        <p>PORT=3000 node app_express.js启动另一个端口的服务，模拟跨域</p>
+
+        <h4>127.0.0.1:5000/a.html</h4>
+        <pre>
+            <code>
+                <!-- <script> -->
+                function jsonp123(data) {
+                    console.log(data);
+                }
+                
+                var url = "http://127.0.0.1:3000/net/iframe/domain_1.html?callback=jsonp123"
+                
+                function getData(url) {
+                    var iframe = document.createElement('iframe');
+                    iframe.src = url
+                    iframe.frameborder = 5;
+                    iframe.width = '300px';
+                    iframe.height = '300px'
+                    document.body.appendChild(iframe)
+                
+                    window.jsonp123 = function (data) {
+                        console.log(data)
+                    }
+                }
+                
+                getData(url)
+                <!-- </script> -->
+            </code>
+        </pre>
+
+        <h4>127.0.0.1:3000/b.html</h4>
+        <pre>
+            <code>
+                <!-- <button>click me</button> -->
+            
+                <!-- <script> -->
+                var btn = document.querySelector('button')
+                var re = /(^|\?)callback=([^=&#]*)/;
+                var match = re.exec(location.search);
+                var funcName = match && match[2]
+        
+                btn.onclick = function () {
+                    window.parent[funcName]('hi cross sucessed');
+                }
+                <!-- </script> -->
+            </code>
+        </pre>
+    </section>
+
+    <section>
+        <h2>iframe跨越解决方案</h2>
+
+        <ul>
+            <li>document.domain = 'baidu.com'
+                <ul>
+                    <li>有局限性：必须是主域相同，协议号和端口都一样的情况下，才能用</li>
+                    <li>不推荐，一般用以下三种</li>
+                </ul>
+            </li>
+            <li>window.name
+                <ul>
+                    <li>没有什么局限性</li>
+                    <li>window.name属性可设置或者返回存放窗口名称的一个字符串</li>
+                    <li>神奇之处在于name值在不同页面或者不同域下加载后依旧存在，没有修改就不会发生变化，并且可以存储非常长的name(2MB)</li>
+                    <li>刚开始跨域父级页面不能访问iframe.contentWindow.name，等到iframe.onload后，给iframe设置一个空的src</li>
+                    <li>此时不是跨域咯，但是name属性还是存在的！！父级页面就能调用iframe.contentWindow.name了</li>
+                </ul>
+            </li>
+            <li>location.hash
+                <ul>
+                    <li>关键点在于如何使父级与子级iframe能够通信</li>
+                    <li>在子级iframe中利用 location.href = '执行父级同源的一个proxy页面地址' + '#data'</li>
+                    <li>此时，同源了，父级页面就能调用子级页面的js对象了</li>
+                </ul>
+            </li>
+            <li>postMessage
+                <ul>
+                    <li>浏览器为了解决跨域提出的一套标准，ie8+都支持</li>
+                    <li>虽然同源，但是可以彼此调用postMessage这个接口，浏览器不会报同源错误！！！</li>
+                    <li>推荐用这个</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+
+
+</body>
+
+</html>

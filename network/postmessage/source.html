@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button>click me</button>
+  <script>
+    var btn = document.querySelector('button')
+    btn.addEventListener('click', function (e) {
+      // 获取target.html页面的window对象
+      window_target = window.open('target.html'); // 默认是新开标签页，_self是自身打开
+      // console.log(window_target)
+
+      // window_target.postMessage('hello, i am origin.', "*"); // 必须传两个参数
+
+      window_target.postMessage('hello', "http://127.0.0.1:5050");
+
+    })
+
+    window.addEventListener('message', function (e) {
+      console.log(e.data)
+    })
+  </script>
+</body>
+</html>

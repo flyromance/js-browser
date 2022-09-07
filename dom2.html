@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div name="fanlong" id="div1" class="ddd dfdsf fanlong">ddd</div>
+<a name="fanlong">fanlong anchor</a>
+<div>ddd</div><input type="text" id="txt"/>
+<div>ddd<span class="span">dddsss</span></div>
+<div style="margin-bottom: 2000px;">ddd<p>p<span>span</span></p></div>
+
+
+<button id="btn">btn</button>
+<a href="#fanlong">to fanlong links</a>
+<script type="text/javascript">
+    var divs = document.querySelectorAll('div');
+    var divss = document.getElementsByTagName('div');
+    console.log(divs.length);
+    console.log(divs['fanlong']);
+    console.log(divs[0].getElementsByClassName('span'));
+    console.log(divss['fanlong']);
+    console.log(divs[0].webkitMatchesSelector('#div1'));
+    console.log(divs[0].classList.item(2));
+    var input = document.getElementById('txt');
+    input.focus();
+    console.log(document.hasFocus());
+    console.log(document.activeElement);
+    console.log(document.readyState);
+    window.onload = function(){
+        console.log(document.readyState);
+        divs[1].innerHTML = '<script>alert(1);<\/script>';
+    }
+    console.log(document.compatMode);
+    var btn = document.getElementById('btn');
+    btn.onclick = function(){
+        input.scrollIntoView();
+        input.focus();
+    }
+</script>
+</body>
+</html>

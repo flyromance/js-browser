@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    /* 不能给wrapper设置position: relative */
+    .wrapper {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .header{
+      height: 50px;
+    }
+
+    .body {
+      position: absolute;;
+      bottom: 50px;
+      top: 50px;
+      width: 100%;
+      background-color: green;
+      overflow: scroll;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 50px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">header</div>
+    <div class="body">
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+      <p>1</p>
+    </div>
+    <div class="footer">footer</div>
+  </div>
+</body>
+</html>

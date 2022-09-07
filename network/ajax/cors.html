@@ -1,0 +1,28 @@
+wwewa-60<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解</a>
+  <section>
+    <h2>cors</h2>
+    <h4>浏览器遇到跨越请求，会拦截，加上origin字段</h4>
+    <ul>
+      <li>需要服务端和浏览器共同支持，浏览器ie10以上才可以</li>
+      <li>场景如下在www.btime.com源下，请求api.btime.com下的资源</li>
+      <li>浏览器发现这是一个跨越的ajax请求，会在请求头上添加一个origin字段，也就是当前页面的源 http://www.btime.com啥的</li>
+      <li>如果想要发送cookie给服务端，设置 xhr.withCredentials = true，浏览器把api.btime.com下的cookie给服务器发过去</li>
+      <li>服务端收到请求后，发现有origin字段，判断这个源是否是允许的，如果允许返回的响应头上加上
+        <ul>
+          <li>access-control-allow-origin: 'www.btime.com' 浏览器发现响应头中没有这个字段，就会报错触发 xhr.onerror事件</li>
+          <li>access-control-allow-credentials: true 是否允许浏览器发送cookie</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</body>
+</html>

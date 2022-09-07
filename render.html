@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <section>
+    <h2>DOCTYPE</h2>
+    <ul>
+      <li>dtd：document type definition 文档类型定义</li>
+      <li>doctype的作用就是告诉浏览器 dtd，让浏览器知道以什么规范渲染当前的文档</li>
+    </ul>
+
+    <h2>种类</h2>
+    <ul>
+      <li>html 5规范：!DOCTYPE html</li>
+      <li>html4.01 strict规范：!DOCTYPE HTML PUBLICE ... strict.dtd
+        <ul>
+          <li>该dtd告诉浏览器可以渲染所有html元素和属性</li>
+          <li>但是！不包括一些特定的元素，比如font</li>
+        </ul>
+      </li>
+      <li>html4.01 transitional规范：!DOCTYEP ... loose.dtd
+        <ul>
+          <li>该dtd告诉浏览器可以渲染所有html元素和属性</li>
+          <li>包括一些展示性的和弃用的元素，比如font</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>浏览器的渲染过程</h2>
+    <ul>
+      <li>html结构 -> dom树</li>
+      <li>css规则 -> css style rules</li>
+      <li>dom树和css style rules结合生产 render树, 其中要进行layout，计算出dom节点的位置大小颜色等</li>
+      <li>浏览器paint这个render，在浏览器上显示页面</li>
+    </ul>
+
+    <h2>reflow 回流</h2>
+    <dl>
+      <dt>什么是reflow</dt>
+      <dd>dom结构中每个元素都有自己的盒子模型，浏览器结合各种style，通过计算layout，并根据计算结果将元素放到该出现的位置display，这个过程就是reflow</dd>
+      <dd>一次reflow，相当于是一次初始化过程</dd>
+      <dt>如何触发reflow</dt>
+      <dd>
+        <ul>
+          <li>增加、删除、修改dom，造成dom位置和大小改变的</li>
+          <li>移动dom位置</li>
+          <li>修改样式，比如：改变网页字体大小，改变元素宽高</li>
+          <li>resize窗口，scroll滚动的时候</li>
+          <li>调用某个css的属性，比如：dom.clientHeight() </li>
+        </ul>
+      </dd>
+      <dt>如何减少reflow</dt>
+      <dd>
+        <ul>
+          <li>对于动画，绝对定位，这样就只有repaint</li>
+        </ul>
+      </dd>
+    </dl>
+
+    <h2>repaint</h2>
+    <dl>
+      <dt>什么是repaint</dt>
+      <dd>当各种盒子的大小位置颜色确定后，浏览器把他们绘制出来display到页面上</dd>
+      <dt>如何触发</dt>
+      <dd>
+        <ul>
+          <li>不该变dom的元素大小和位置</li>
+        </ul>
+      </dd>
+    </dl>
+  </section>
+</body>
+
+</html>

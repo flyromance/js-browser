@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #outer{width:200px;height:200px;background-color: aquamarine}
+        #inner{
+            margin: 30px;width:100px;height: 100px;background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="outer">outer
+    <div id="inner">inner</div>
+</div>
+<input id="input" type="button" value="button"/>
+<script>
+    var outer = document.getElementById('outer');
+    var inner = document.getElementById('inner');
+    var btn = document.getElementById('input');
+
+    // 获得焦点时，按回车就能触发click事件
+    btn.onclick = function(){
+        console.log(123);
+        window.location.hash = 'nnn' + Math.random();
+    }
+
+    /*// 冒泡事件
+    outer.onmouseout = function(){
+        console.log('out');
+    }
+    outer.onmouseover = function(){
+        console.log('over');
+    }*/
+
+    // 不冒泡
+    outer.onmouseenter = function(){
+        console.log('enter');
+    }
+    outer.onmouseleave = function(){
+        console.log('leave');
+    }
+    // 不能用document.onDM。。的方式加事件处理程序！！！
+    document.addEventListener('DOMContentLoaded',function(){
+        alert('Dom loaded event');
+    })
+
+    window.addEventListener('hashchange',function(e){
+        alert('hash changed');
+        console.log(e.newURL);
+        console.log(e.oldURL);
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Page2</h1>
+    <button>click me</button>
+
+    <script>
+        var btn = document.querySelector('button')
+        var re = /(^|\?)callback=([^=&#]*)/;
+        var match = re.exec(location.search);
+        var funcName = match && match[2]
+
+        btn.onclick = function () {
+            window.parent[funcName]('hi cross sucessed');
+        }
+
+    </script>
+</body>
+
+</html>

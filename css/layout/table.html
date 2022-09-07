@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    #wrapper {
+      width: 1000px;
+      margin: 0 auto;
+    }
+
+    .layout {
+      display: table;
+      width: 100%;
+    }
+
+    .col-main, .col-left, .col-right {
+      display: table-cell;
+    }
+
+    .col-left {
+      width: 300px;
+    }
+
+    .col-right {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <!-- 必须放中间 -->
+    <div class="layout">
+      <div class="col-left">left</div>
+      <div class="col-main">main</div>
+      <div class="col-right">right</div>
+    </div>
+  </div>
+</body>
+</html>

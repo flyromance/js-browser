@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="./my_ls.js"></script>
+    <script type="text/javascript">
+    	var btime_ls = new LocalCache('btime');
+    	var btv_ls = new LocalCache('btv');
+    	btime_ls.set('name', {name: 'fanlong', age: 12});
+    	btv_ls.set('name', 'fanlong2046');
+    	console.log(btime_ls.get('name'));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li>this is child, <button>click me</button></li>
+    <li>this is child</li>
+    <li>this is child</li>
+    <li>this is child</li>
+    <li>this is child</li>
+  </ul>
+
+  <script>
+    function returnFalse() {
+      return false
+    }
+
+    function returnTrue() {
+      return true
+    }
+
+    function EventMe(e) {
+      e = e || window.event;
+      e.target = e.target || e.srcElement;
+      this._original = e;
+      this.isPreventDefault = returnTrue;
+      this.isStopPropagation = returnTrue;
+      this.isStopImmediatePropagation = returnTrue;
+    }
+
+    EventMe.prototype = {
+      constructor: EventMe,
+      preventDefault: function () {
+        var _original = this._original;
+        if (_original.preventDefault) {
+          _original.preventDefault()
+        } else {
+          _original.returnValue = false;
+        }
+        this.isPreventDefault = returnFalse;
+      },
+      stopPropagation: function () {
+        var _original = this._original;
+        if (_original.stopPropagation) {
+          _original.stopPropagation()
+        } else {
+          _original.cancelBubble = true;
+        }
+        this.isStopPropagation = returnFalse;
+      },
+      stopImmediatePropagation: function () {
+        var _original = this._original;
+        if (_original.stopImmediatePropagation) {
+          _original.stopImmediatePropagation()
+        } else {
+          // _original.cancelBubble = true;
+        }
+        this.isStopImmediatePropagation = returnTrue;
+      },
+    }
+
+    var dataBus = (function () {
+      var key = 'my_event_key' + new Date.getTime();
+      var uid = 0;
+      var cache = {
+
+      }
+
+      function getId(dom) {
+        return typeof dom[key] === 'undefined' ? (dom[key] = uid++) : dom[key]
+      }
+
+      return {
+        get: function (dom, type) {
+          var id = getId(dom);
+          var data = cache[id] || (cache[id] = {});
+          var eventData = data.events || (data.events = {});
+          var _data = eventData[type] || (eventData[type] = []);
+          return _data;
+        },
+        set: function (dom, type, handler) {
+          var id = getId(dom);
+          var data = cache[id] || (cache[id] = {});
+          var eventData = data.events || (data.events = {});
+          var _data = eventData[type] || (eventData[type] = []);
+        }
+      }
+    })()
+
+    function delegate(dom, type, selector, handler) {
+      dom.addEventListener(type, function (e) {
+        var event = new EventMe(e);
+        
+        var target = event._original.target;
+        var elems = [].slice.call(dom.querySelectorAll(selector));
+        var parent = target;
+        var arr = [];
+        while(parent) {
+          elems.forEach(element => {
+            if (element === parent) {
+              arr.push(element)
+            }
+          });
+          parent = parent.parentNode;
+          if (parent == dom) {
+            break;
+          }
+        }
+        
+        arr.forEach(item => {
+          handler.call(item, event)
+        })
+      })
+    }
+    var ul = document.querySelector('ul');
+
+    delegate(ul, 'click', 'button', function (e) {
+      console.log(this)
+    })
+  </script>
+</body>
+
+</html>

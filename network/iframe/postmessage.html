@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function jsonp123(data) {
+      console.log(data);
+    }
+
+    var url = "http://127.0.0.1:3000/net/iframe/postmessage_1.html"
+
+    var list = [];
+
+    window.addEventListener('message', function (e) {
+      list.forEach(function (item) {
+        item && item.call(null, e.data)
+      })
+    })
+
+    function getData(url, cb) {
+      // 插入iframe
+      var iframe = document.createElement('iframe');
+      iframe.src = url
+      iframe.frameborder = 5;
+      iframe.width = '300px';
+      iframe.height = '300px';
+      list.push(cb)
+      document.body.appendChild(iframe) // 和script一样，必须加到页面上才会发出请求
+    }
+
+    getData(url, function (data) {
+      console.log(data)
+    })
+  </script>
+</body>
+
+</html>

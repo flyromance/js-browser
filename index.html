@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      div {
+        box-sizing: padding-box;
+      }
+
+      #box {
+        /*visibility: hidden;*/
+        padding: 10px;
+        margin: 10px;
+        border: 10px solid #ddd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h3>
+      getComputedStyle(dom, null)[prop] &nbsp;&nbsp; dom.currentStyle[prop]
+    </h3>
+    <ul>
+      <li>ie6-ie8不支持</li>
+      <li>getComputedStyle(dom, null)返回一个对象obj, obj[porp]获取</li>
+      <li>
+        第二个参数":after"，获取伪类的属性，一般不写，但是有的浏览器报错，所以写个null替代
+      </li>
+      <li>
+        obj对象上标识浮动的属性为styleFloat或者cssFloat，很蛋疼，这时候getPropertyValue出来了
+      </li>
+      <li>obj.getPropertyValue('float')，ok</li>
+      <li>
+        dom.currentStyle返回一个对象obj,
+        obj[prop]获取值；所以从api上看，currentStyle无法获取伪类的属性。。
+      </li>
+      <li>dom.</li>
+    </ul>
+    <h3>位置</h3>
+    <ul>
+      <li>
+        浏览器滚动条距离：document.documentElement.scrollLeft ||
+        document.body.scrollLeft
+      </li>
+      <li>
+        e.pageX 有些浏览器不支持， 模拟：e.pageX = e.clientX +
+        document.documentElement.scrollLeft
+      </li>
+    </ul>
+    <h3>尺寸</h3>
+    <ul>
+      <li>
+        box-sizing: padding-box 只有firefox55支持，最好别用； 默认是content-box,
+        可设为border-box
+      </li>
+      <li>scrollHeight可以获取到height为0的元素的高度</li>
+    </ul>
+    <div id="box">dddd</div>
+  </body>
+</html>

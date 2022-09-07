@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      const currentScript = document.querySelector("#xxx");
+      document.addEventListener("DOMContentLoaded", () => {
+        alert("dom load");
+      });
+      window.onload = () => {
+        alert("window load");
+      };
+      // requestAnimationFrame(() => {
+      //   alert("frame 11111");
+      // });
+    </script>
+    <!-- <link href="http://localhost:9191/css/defer.css" rel="stylesheet" /> -->
+  </head>
+  <body>
+    <div id="app">app</div>
+    <!-- <img src="http://localhost:9191/img/loop.png" /> -->
+    <script async src="http://localhost:9191/js/defer1.js"></script>
+    <script id="xxx">
+      alert("macro 1");
+      // let a1 = 0;
+      // while (a1 < 1000000000) {
+      //   a1++;
+      // }
+      Promise.resolve().then(() => {
+        alert("micro 1");
+      });
+      requestAnimationFrame(() => {
+        alert("frame 1");
+      });
+      setTimeout(() => {
+        alert("macro 1-1");
+        // alert(document.querySelector("#app"));
+      }, 100);
+
+      /** 影响onload时间
+      const img = document.createElement("img");
+      img.src = "http://localhost:9191/img/loop.png"; // 只要设置src就开始下载
+
+      const script = document.createElement("script");
+      script.src = "http://localhost:9191/js/defer.js";
+      document.body.appendChild(script); // 只有插入到dom树才开始下载
+      **/
+
+      // 不影响onload时间
+      // setTimeout(() => {
+      //   const script = document.createElement("script");
+      //   script.src = "http://localhost:9191/js/defer.js";
+      //   document.body.appendChild(script);
+      // });
+    </script>
+
+    <script>
+      // alert("macro 2");
+      // Promise.resolve().then(() => {
+      //   alert("micro 2");
+      // });
+      // requestAnimationFrame(() => {
+      //   alert("frame 2");
+      // });
+      // setTimeout(() => {
+      //   alert("macro 2-2");
+      // });
+    </script>
+
+    <!-- 执行很慢要好几秒 -->
+    <script src="http://localhost:9191/js/defer.js"></script>
+
+    <script>
+      alert("macro 4");
+      Promise.resolve().then(() => {
+        alert("micro 4");
+      });
+      //   let a = 1;
+      //   while(a < 10000000000) {
+      //     a++
+      //   }
+      // requestAnimationFrame(() => {
+      //   alert(document.querySelector("#app"));
+      //   alert(document.querySelector("#app2"));
+      // });
+    </script>
+    <div id="app2">app2</div>
+  </body>
+</html>

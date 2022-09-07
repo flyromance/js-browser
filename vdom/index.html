@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <ul>
+      <li><a href="https://segmentfault.com/a/1190000004029168">深度剖析：如何实现一个 Virtual DOM 算法</a></li>
+      <li><a href="https://github.com/KieSun/My-wheels">my-wheels</a></li>
+    </ul>
+
+    <div id="app"></div>
+
+    <script src="./util.js"></script>
+    <script src="./element.js"></script>
+    <script src="./diff.js"></script>
+    <script src="./patch.js"></script>
+    <script>
+      let vnode = createVnode("div", { id: "page" }, [
+        createVnode("div", null, ["children1"], "key1"),
+        createVnode("div", null, [createVnode("div", null, ["children2"])], "key2")
+      ]);
+
+      vnode.render("#app");
+
+      setTimeout(function() {
+        let newVnode = createVnode("div", { id: "page" }, [
+          createVnode("div", null, ['children1_modify'], "key1"),
+          // createVnode("div", null, [createVnode("div", null, ["children2"])], "key2")
+        ]);
+
+        let patches = diff(newVnode, vnode);
+        console.log(patches);
+        patch(document.getElementById("page"), patches);
+      }, 1000);
+    </script>
+  </body>
+</html>

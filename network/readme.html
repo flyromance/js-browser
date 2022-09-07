@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <section>
+    <h2>同源策略</h2>
+    <p>同源策略：限制一个源的文档与来自另一个源的资源进行交互</p>
+    <p>这是一个用于隔离潜在的恶意文件的关键的安全策略</p>
+
+    <h2>源</h2>
+    <p>协议号 + 域名 + 端口， 如：https://www.baidu.com:9090</p>
+
+    <h2>具体限制</h2>
+    <ul>
+      <li>ajax不能发送</li>
+      <li>cookie localStorage indexDB不能获取</li>
+      <li>dom无法获得</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>前后端如何通信</h2>
+    <ul>
+      <li>ajax</li>
+      <li>websocket 支持非同源</li>
+      <li>cors</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>手写ajax</h2>
+    <pre>
+      <code>
+        try {
+          var xhr = new XMLHttpRequest()
+        } catch(e) {
+          xhr = new ActiveXObject('Microsoft.XMLHTTp')
+        }
+
+        xhr.open('get', url + querystring, true)
+        // xhr.open('post', url, true)
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 304 || (xhr.status >= 200 && xhr.status < 300)) {
+              handler.call(xhr, xhr.responseText)
+            }
+          }
+        }
+        // xhr.onload = function () {}; ie不支持
+        // xhr.onabort = function () {}; 中断，调用xhr.abort()
+
+
+        // post情况下设置：告诉服务端请求体是什么格式
+        // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded') 
+
+        xhr.send(null);
+        // xhr.send(querystring)
+      </code>
+    </pre>
+  </section>
+
+  <section>
+    <h2>跨域通信的方式</h2>
+    <ul>
+      <li>jsonp</li>
+      <li>hash</li>
+      <li>iframe</li>
+      <li>postMessage</li>
+      <li>websocket</li>
+      <li>CORS: 支持跨域通信的ajax</li>
+    </ul>
+  </section>
+</body>
+
+</html>

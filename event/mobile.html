@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="margin: 0">
+    <div id="div" style="height: 100vh">
+      <a
+        id="a"
+        href="https://baidu.com"
+        style="display: inline-block; width: 100%"
+      >
+        <span id="span">click me </span>
+      </a>
+    </div>
+    <script>
+      //   console.log("onmousedown" in document);
+
+      const a = document.querySelector("#a");
+      const span = document.querySelector("#span");
+
+      span.addEventListener("touchstart", (e) => {
+        console.log("span touchstart");
+        // e.target.xxxx = +new Date();
+        // console.log(e.target.xxxx);
+        e.stopPropagation();
+      });
+      span.addEventListener("touchmove", (e) => {
+        console.log("span touchmove");
+      });
+      span.addEventListener("touchend", (e) => {
+        console.log("span touchend");
+        // console.log("touchend", +new Date() - e.target.xxxx);
+        // e.preventDefault(); // 阻止click事件
+      });
+
+      a.addEventListener("touchstart", (e) => {
+        console.log("a touchstart");
+        // e.target.xxxx = +new Date();
+        // console.log(e.target.xxxx);
+      });
+      a.addEventListener("touchmove", (e) => {
+        console.log("a touchmove");
+      });
+      a.addEventListener("touchend", (e) => {
+        console.log("a touchend");
+        // console.log("touchend", +new Date() - e.target.xxxx);
+        // e.preventDefault(); // 阻止click事件
+      });
+      a.addEventListener(
+        "click",
+        (e) => {
+          //   alert(e === e1); // true
+          console.log("a click");
+          //   e.preventDefault();
+        },
+        { capture: true }
+      );
+      a.addEventListener(
+        "click",
+        (e) => {
+          console.log("a click");
+          //   e.preventDefault();
+        }
+        // { capture: true }
+      );
+
+      document.addEventListener("touchstart", (e) => {
+        console.log("doc touchstart");
+        // e.target.xxxx = +new Date();
+        // console.log(e.target.xxxx);
+      });
+      document.addEventListener("touchmove", (e) => {
+        console.log("doc touchmove");
+      });
+      document.addEventListener("touchend", (e) => {
+        console.log("doc touchend");
+        // console.log("doc touchend", +new Date() - e.target.xxxx);
+        // e.preventDefault(); // 阻止click事件
+        // debugger;
+      });
+
+      let e1;
+      document.addEventListener(
+        "click",
+        (e) => {
+          e1 = e;
+          //   e.stopImmediatePropagation(); // 阻止同一个dom上绑定的多个事件，必然也阻止往下一个dom节点走
+          //   e.stopPropagation(); // 阻止往下一个dom节点走
+          console.log("click");
+          //   e.preventDefault();
+        },
+        { capture: true }
+      );
+      document.addEventListener(
+        "click",
+        (e) => {
+          debugger;
+          // alert(e === e1);  // true
+          console.log("click");
+          //   e.preventDefault();
+        }
+        // { capture: true }
+      );
+
+      const div = document.querySelector("#div");
+      div.addEventListener("contextmenu", (e) => {
+        e.stopPropagation();
+      });
+      window.addEventListener(
+        "contextmenu",
+        (e) => {
+          e.preventDefault();
+        },
+        { capture: true }
+      );
+    </script>
+  </body>
+</html>

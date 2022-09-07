@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var ws = new WebSocket('ws://xxxx.xxx.xx');
+
+    // 初始化完毕
+    ws.onopen = function () {
+      console.log('connection ok...')
+      ws.send('i am ok...');
+    }
+
+    // 接收到消息
+    ws.onmessage = function (e) {
+      console.log(e.data)
+    }
+
+    // ws.close()
+    ws.onclose = function () {
+      console.log('connection close...')
+    }
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    #wrapper {
+      width: 1000px;
+      margin: 0 auto;
+    }
+
+    .layout {
+      overflow: hidden;
+    }
+
+    .col-main-wrapper, .col-left, .col-right {
+      float: left;
+    }
+
+    .col-main-wrapper {
+      width: 100%;
+    }
+
+    .col-main {
+      margin: 0 200px 0 300px;
+    }
+
+    .col-left {
+      width: 300px;
+      margin-left: -100%;
+    }
+
+    .col-right {
+      margin-left: -200px;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <!-- main必须放在最上面 -->
+    <div class="layout">
+      <div class="col-main-wrapper">
+        <div class="col-main">main</div>
+      </div>
+      <div class="col-left">left</div>
+      <div class="col-right">right</div>
+    </div>
+  </div>
+</body>
+</html>

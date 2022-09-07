@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <a href="http://www.jianshu.com/p/12b9f73c5a4f">js运行机制(事件循环机制)</a>
+  <a href="https://juejin.im/post/59e85eebf265da430d571f89?utm_source=gold_browser_extension">这一次彻底弄懂js执行机制</a>
+  <br>
+  <img style="position: absolute; right:20px;" src="eventloop.png" alt="" width="600px" height="600px">
+  <img style="position: absolute; top:700px; right: 20px;" src="eventloop2.png" alt="" width="600px" height="600px">
+
+  <section>
+    <h2>js运行机制</h2>
+    <ul>
+      <li><strong>单线程</strong> 
+        <ul>
+          <li>也就是说：同一时间只能做一件事情, 也就是同步的，全部执行完</li>
+          <li>但是有时候，有的任务执行需要耗费很多事件，比如ajax请求，并且又别的线程取处理的，这个时候就有必要引入异步的概念了</li>
+          <li>同步任务
+            <p>比如 整体代码的执行，函数体中的代码...</p>
+            <p>js有一个执行栈，专门用来执行同步任务</p>
+          </li>
+          <li>异步任务
+            <ul>
+              <li>setTimeout，setInterval</li>
+              <li>dom事件</li>
+              <li>Promise</li>
+            </ul>
+            <p>浏览器js引擎发现这些任务，就放入，event table 中</p>
+          </li>
+        </ul>
+      </li>
+      <li><strong>事件表Event Table</strong>
+        <p>在这个列表中存储handler, 这个handler会在某一个时间点放入Event Queue</p>
+        <p>这个handler可以被取消，也就是clearTimeout.</p>
+        <ul>
+          <li>setTimeout(fn, 2000), 注册一个回调，2000ms后，把fn放在Event Query中；期间可以被取消</li>
+          <li>setInterval</li>
+          <li>process.nextTick(), 这是node的api</li>
+          <li>window.requestAnimationFrame()</li>
+          <li>dom事件，先注册到event table中，用户点击的时候在放入Queue中</li>
+        </ul>
+      </li>
+      <li><strong>队列Event Queue</strong>
+        <p>等着被执行栈取出任务handler来执行，被循环所控制</p>
+        <p>如果此时，调用栈没有任务，就直接取出来执行</p>
+        <ul>
+          <li>宏任务队列 macro task
+            <ul>
+              <li>整体代码执行</li>
+              <li>setTimeout</li>
+              <li>setInterval</li>
+            </ul>
+          </li>
+          <li>微任务队列 micro task
+            <ul>
+              <li>promise</li>
+              <li>process.nextTick</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>循环执行</strong>
+        <p>既然有了队列，谁来执行队列呢，当然是浏览器咯，浏览器定义了一个机制，循环往复的执行队列，只要队列里有handler，就推到执行栈中执行</p>
+        <ul>
+          <li>一次循环，也就是执行宏任务，再执行微任务
+            <P>注意：先是取出宏队列中的
+              <strong style="color:red;">第一个</strong>来执行，再执行微队列中的
+              <strong style="color:red;">所有</strong>任务</P>
+          </li>
+          <li>然后在下一次循环，往复。。</li>
+        </ul>
+      </li>
+      <li><strong>总结</strong>
+        <ul>
+          <li>同步代码执行栈call stack，负责执行代码</li>
+          <li>event loop是核心，负责从queue中取出同步代码，放入call stack</li>
+          <li>event queue是等待着被loop取出的</li>
+          <li>event table 存放异步任务，可以被取消，等着合适的时机被推入queue中</li>
+          <li></li>
+        </ul>
+      </li>
+    </ul>
+
+  </section>
+
+  <script>
+    setTimeout(function () {
+      console.log(1)
+      setTimeout(function () {
+        console.log(3)
+      }, 1000)
+    });
+
+    setTimeout(function () {
+      console.log(2)
+    }, 3000)
+
+  </script>
+</body>
+
+</html>

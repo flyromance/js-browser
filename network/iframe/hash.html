@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <!-- 重新启动一个服务器，端口号不一样，可以模拟跨域 -->
+
+  <script type="text/javascript">
+
+    function jsonp123(data) {
+      console.log(data);
+    }
+
+    var url = "http://127.0.0.1:3000/net/iframe/hash_1.html"
+
+    function getData(url, cb) {
+      // 插入iframe
+      var iframe = document.createElement('iframe');
+      iframe.src = url
+      iframe.frameborder = 5;
+      iframe.width = '300px';
+      iframe.height = '300px';
+
+      iframe.onload = function () {
+        var data = iframe.contentWindow.location.hash.slice(1); // 获取数据，此数据通过hash值传递
+        // var data = iframe.contentWindow.location.search.slice(1); // 获取数据，此数据通过url中的search值传递
+        cb.call(null, data)
+      }
+
+      document.body.appendChild(iframe) // 和script一样，必须加到页面上才会发出请求
+    }
+
+    getData(url, function (data) {
+      console.log(data)
+    })
+
+  </script>
+
+</body>
+
+</html>
